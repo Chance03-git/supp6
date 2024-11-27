@@ -17,6 +17,18 @@ def generate_normal_array(shape, mean, std_dev):
 
     return np.random.normal(loc=mean, scale=std_dev, size=shape)
 def solve_cramers_rule(coeff_matrix, constants):
+    """Solves a system of linear equations using Cramer's rule.
+
+    Args:
+        coeff_matrix: A 2D list or NumPy array representing the coefficients of the variables.
+        constants: A 1D list or NumPy array representing the constants on the right-hand side.
+
+    Returns:
+        A list of solutions for the variables.
+
+    Raises:
+        ValueError: If the coefficient matrix is not square or if its determinant is zero.
+    """
     coeff_matrix = np.array(coeff_matrix, dtype=float)
     constants = np.array(constants, dtype=float)
 

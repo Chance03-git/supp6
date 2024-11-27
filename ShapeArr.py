@@ -56,6 +56,22 @@ def solve_cramers_rule(coeff_matrix, constants):
 
     return solutions
 def generate_array_and_find_indexes(shape, low=0, high=100):
+     """Generates an array of random integers and returns indexes of even and odd numbers.
+
+    Args:
+        shape: A tuple specifying the shape of the array (e.g., (3, 4)).
+        low: The minimum integer value in the array (inclusive, default is 0).
+        high: The maximum integer value in the array (exclusive, default is 100).
+
+    Returns:
+        A tuple containing:
+            - The generated array.
+            - A list of tuples representing the indexes of even numbers.
+            - A list of tuples representing the indexes of odd numbers.
+
+    Raises:
+        ValueError: If the shape is not valid or high <= low.
+    """     
      if high <= low:
         raise ValueError("High must be greater than low.")
      if not isinstance(shape, tuple) or not all(isinstance(x, int) and x > 0 for x in shape):

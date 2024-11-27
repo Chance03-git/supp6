@@ -16,6 +16,35 @@ def generate_normal_array(shape, mean, std_dev):
         raise ValueError("Standard deviation cannot be negative.")
 
     return np.random.normal(loc=mean, scale=std_dev, size=shape)
+def solve_cramers_rule(coeff_matrix, constants):
+    coeff_matrix = np.array(coeff_matrix, dtype=float)
+    constants = np.array(constants, dtype=float)
+
+    # Check if the coefficient matrix is square
+    if coeff_matrix.shape[0] != coeff_matrix.shape[1]:
+        raise ValueError("Coefficient matrix must be square.")
+    
+    # Check if determinant of the coefficient matrix is zero
+    det_main = np.linalg.det(coeff_matrix)
+    if det_main == 0:
+        raise ValueError("The system has no unique solution (determinant is zero).")
+    
+    # Solve for each variable using Cramer's Rule
+    num_variables = coeff_matrix.shape[0]
+    solutions = []
+    
+    for i in range(num_variables):
+        # Create a modified matrix by replacing the i-th column with the constants
+        modified_matrix = coeff_matrix.copy()
+        modified_matrix[:, i] = constants
+        # Calculate the determinant of the modified matrix
+        det_modified = np.linalg.det(modified_matrix)
+        # Calculate the solution for the i-th variable
+        solutions.append(det_modified / det_main)
+
+    return solutions
+
+
 def test_should_generate_values_within_distribution():
     """Tests that the generated values follow the specified mean and standard deviation."""
     shape = (1000,)

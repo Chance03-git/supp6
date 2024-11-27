@@ -88,3 +88,14 @@ def test_should_solve_2x2_system():
     constants = [1, 5]
     result = solve_cramers_rule(coeff_matrix, constants)
     assert np.allclose(result, [2, 3]), f"Test failed: Expected [2, 3], got {result}"
+def test_should_return_correct_indexes_for_generated_array():
+    """Tests the function for a small array."""
+    shape = (2, 3)
+    array, even_indexes, odd_indexes = generate_array_and_find_indexes(shape, low=1, high=10)
+
+    for idx in even_indexes:
+        assert array[idx] % 2 == 0, f"Test failed: Index {idx} is not even."
+    for idx in odd_indexes:
+        assert array[idx] % 2 != 0, f"Test failed: Index {idx} is not odd."
+
+    assert len(even_indexes) + len(odd_indexes) == array.size

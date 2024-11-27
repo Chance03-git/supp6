@@ -1,5 +1,17 @@
 import numpy as np
 def generate_normal_array(shape, mean, std_dev):
+    """ Args:
+        shape: A tuple specifying the shape of the array (e.g., (3, 4)).
+        mean: The mean of the normal distribution.
+        std_dev: The standard deviation of the normal distribution.
+
+    Returns:
+        A NumPy array with the specified shape, filled with numbers 
+        from a normal distribution with the given mean and standard deviation.
+
+    Raises:
+        ValueError: If the standard deviation is negative.
+    """
     if std_dev < 0:
         raise ValueError("Standard deviation cannot be negative.")
 

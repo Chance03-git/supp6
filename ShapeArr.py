@@ -55,8 +55,20 @@ def solve_cramers_rule(coeff_matrix, constants):
         solutions.append(det_modified / det_main)
 
     return solutions
+def generate_array_and_find_indexes(shape, low=0, high=100):
+     if high <= low:
+        raise ValueError("High must be greater than low.")
+     if not isinstance(shape, tuple) or not all(isinstance(x, int) and x > 0 for x in shape):
+        raise ValueError("Shape must be a tuple of positive integers.")
 
+     # Generate the random integer array
+     array = np.random.randint(low, high, size=shape)
 
+     # Find indexes of even and odd numbers
+     even_indexes = list(zip(*np.where(array % 2 == 0)))
+     odd_indexes = list(zip(*np.where(array % 2 != 0)))
+
+     return array, even_indexes, odd_indexes
 def test_should_generate_values_within_distribution():
     """Tests that the generated values follow the specified mean and standard deviation."""
     shape = (1000,)

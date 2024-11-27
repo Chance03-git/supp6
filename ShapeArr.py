@@ -32,6 +32,7 @@ def test_should_generate_values_within_distribution():
     assert np.abs(np.mean(result) - mean) < 0.1, f"Test failed: Mean deviates significantly from {mean}."
     assert np.abs(np.std(result) - std_dev) < 0.1, f"Test failed: Std deviation deviates significantly from {std_dev}."
 def test_should_raise_exception_for_negative_std_dev():
+
      shape = (3, 3)
      mean = 0
      std_dev = -1
@@ -40,3 +41,9 @@ def test_should_raise_exception_for_negative_std_dev():
         assert False, "Test failed: Expected ValueError for negative std_dev."
      except ValueError as e:
         assert str(e) == "Standard deviation cannot be negative."
+def test_should_solve_2x2_system():
+    """Tests solving a simple 2x2 system."""
+    coeff_matrix = [[2, -1], [1, 1]]
+    constants = [1, 5]
+    result = solve_cramers_rule(coeff_matrix, constants)
+    assert np.allclose(result, [2, 3]), f"Test failed: Expected [2, 3], got {result}"
